@@ -1,0 +1,158 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector
+  postgres:
+    image: pgvector/pgvector:pg14
+    container_name: zero2onez-postgres
+    environment:
+      POSTGRES_DB: zero2onez
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Redis for caching/pubsub
+  redis:
+    image: redis:7.0-alpine
+    container_name: zero2onez-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # NATS for event streaming
+  nats:
+    image: nats:2.10-alpine
+    container_name: zero2onez-nats
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+      - "6222:6222"  # Cluster routing
+    command:
+      - "-js"
+      - "-m"
+      - "8222"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # LiveKit SFU
+  livekit:
+    image: livekit/livekit:latest
+    container_name: zero2onez-livekit
+    ports:
+      - "7880:7880"  # HTTP/HTTPS
+      - "7881:7881"  # TURN UDP
+      - "7882:7882"  # TURN TCP
+      - "50000-60000:50000-60000/udp"  # RTP
+    environment:
+      - LIVEKIT_KEYS=${LIVEKIT_KEYS:-devkey: devsecret}
+      - LIVEKIT_CONFIG=/etc/livekit.yaml
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:7880/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Prometheus for metrics
+  prometheus:
+    image: prom/prometheus:v2.40.0
+    container_name: zero2onez-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    restart: unless-stopped
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:9.3.0
+    container_name: zero2onez-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=redis-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  # Jaeger for distributed tracing
+  jaeger:
+    image: jaegertracing/all-in-one:1.39
+    container_name: zero2onez-jaeger
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "6831:6831/udp"  # Jaeger agent
+      - "14268:14268"  # Jaeger collector HTTP
+      - "9411:9411"  # Zipkin
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+    restart: unless-stopped
+
+  # Tool Registry Service (FastAPI)
+  tool-registry:
+    build:
+      context: ./python
+      dockerfile: ../docker/Dockerfile.tool-registry
+    container_name: zero2onez-tool-registry
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/zero2onez
+      - REDIS_URL=redis://redis:6379/0
+      - NATS_URL=nats://nats:4222
+    volumes:
+      - ./python:/app
+      - ./Models:/app/Models:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  default:
+    name: zero2onez-network
+
