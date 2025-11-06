@@ -1,2 +1,0 @@
-"""Emotion Wrappers Package."""
-

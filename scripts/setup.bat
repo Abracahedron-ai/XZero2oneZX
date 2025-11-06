@@ -5,12 +5,12 @@ echo 📦 Installing root dependencies...
 call npm install
 
 echo 📦 Installing renderer dependencies...
-cd renderer
+cd src\frontend\renderer
 call npm install
-cd ..
+cd ..\..\..
 
 echo 🐍 Setting up Python environment...
-cd python
+cd src\backend\api
 python -m venv venv
 call venv\Scripts\activate.bat
 python -m pip install --upgrade pip

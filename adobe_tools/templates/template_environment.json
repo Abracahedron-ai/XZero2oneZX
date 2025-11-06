@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "generatedAt": "2025-11-06T09:40:44.155Z",
+  "source": "predefined",
+  "name": "Environment Template",
+  "categories": [
+    {
+      "name": "env",
+      "items": [
+        {
+          "category": "env",
+          "name": "floor_tile_a",
+          "role": "base",
+          "id": "tile_a",
+          "tags": [
+            "tileable"
+          ]
+        },
+        {
+          "category": "env",
+          "name": "floor_tile_b",
+          "role": "base",
+          "id": "tile_b",
+          "tags": [
+            "tileable"
+          ]
+        },
+        {
+          "category": "env",
+          "name": "wall_brick",
+          "role": "base",
+          "id": "wall_brick",
+          "tags": [
+            "tileable"
+          ]
+        },
+        {
+          "category": "env",
+          "name": "ceiling_panel",
+          "role": "base",
+          "id": "ceiling",
+          "z": 10
+        }
+      ]
+    }
+  ]
+}

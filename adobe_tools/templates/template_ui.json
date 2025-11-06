@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "generatedAt": "2025-11-06T09:40:44.149Z",
+  "source": "predefined",
+  "name": "UI Elements Template",
+  "categories": [
+    {
+      "name": "ui",
+      "items": [
+        {
+          "category": "ui",
+          "name": "button_primary",
+          "role": "base",
+          "id": "btn_prim",
+          "z": 10,
+          "width": 200,
+          "height": 50,
+          "tags": [
+            "hover",
+            "focus"
+          ]
+        },
+        {
+          "category": "ui",
+          "name": "button_secondary",
+          "role": "base",
+          "id": "btn_sec",
+          "z": 10,
+          "width": 200,
+          "height": 50
+        },
+        {
+          "category": "ui",
+          "name": "button_disabled",
+          "role": "base",
+          "id": "btn_dis",
+          "z": 10,
+          "width": 200,
+          "height": 50
+        },
+        {
+          "category": "ui",
+          "name": "panel_background",
+          "role": "base",
+          "id": "panel_bg",
+          "z": 5,
+          "width": 400,
+          "height": 300,
+          "tags": [
+            "9s"
+          ]
+        },
+        {
+          "category": "ui",
+          "name": "icon_close",
+          "role": "base",
+          "id": "icon_close",
+          "z": 20,
+          "width": 24,
+          "height": 24
+        }
+      ]
+    }
+  ]
+}

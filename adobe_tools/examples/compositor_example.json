@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "generatedAt": "2025-01-11T20:00:00.000Z",
+  "source": "template",
+  "templateName": "Particle System Template",
+  "layers": [
+    {
+      "id": "part_expl_core",
+      "name": "explosion_core",
+      "parentId": null,
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": { "x": 1, "y": 1, "z": 1 }
+      },
+      "pivot": {
+        "position": { "x": 0.5, "y": 0.5, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "mode": "layer"
+      },
+      "flags": {
+        "editMode": false,
+        "selectable": true
+      },
+      "meta": {
+        "unitScale": 1,
+        "description": "particles | emitter | tags: burst, radial | size: 64x64",
+        "category": "particles",
+        "role": "emitter",
+        "tags": ["burst", "radial"],
+        "width": 64,
+        "height": 64
+      },
+      "type": "particle",
+      "zIndex": 100,
+      "captureToOutput": true,
+      "blendMode": "normal",
+      "opacity": 1
+    },
+    {
+      "id": "part_expl_deb",
+      "name": "explosion_debris",
+      "parentId": null,
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": { "x": 1, "y": 1, "z": 1 }
+      },
+      "pivot": {
+        "position": { "x": 0.5, "y": 0.5, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "mode": "layer"
+      },
+      "flags": {
+        "editMode": false,
+        "selectable": true
+      },
+      "meta": {
+        "unitScale": 1,
+        "description": "particles | particle | tags: trail, gravity | size: 16x16",
+        "category": "particles",
+        "role": "particle",
+        "tags": ["trail", "gravity"],
+        "width": 16,
+        "height": 16
+      },
+      "type": "particle",
+      "zIndex": 101,
+      "captureToOutput": true,
+      "blendMode": "normal",
+      "opacity": 1
+    },
+    {
+      "id": "part_smoke",
+      "name": "smoke_cloud",
+      "parentId": null,
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": { "x": 1, "y": 1, "z": 1 }
+      },
+      "pivot": {
+        "position": { "x": 0.5, "y": 0.5, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "mode": "layer"
+      },
+      "flags": {
+        "editMode": false,
+        "selectable": true
+      },
+      "meta": {
+        "unitScale": 1,
+        "description": "particles | particle | tags: fade, expand | size: 32x32",
+        "category": "particles",
+        "role": "particle",
+        "tags": ["fade", "expand"],
+        "width": 32,
+        "height": 32
+      },
+      "type": "particle",
+      "zIndex": 99,
+      "captureToOutput": true,
+      "blendMode": "normal",
+      "opacity": 0.8
+    },
+    {
+      "id": "part_spark",
+      "name": "spark",
+      "parentId": null,
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": { "x": 1, "y": 1, "z": 1 }
+      },
+      "pivot": {
+        "position": { "x": 0.5, "y": 0.5, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "mode": "layer"
+      },
+      "flags": {
+        "editMode": false,
+        "selectable": true
+      },
+      "meta": {
+        "unitScale": 1,
+        "description": "particles | particle | tags: fast, bright | size: 8x8",
+        "category": "particles",
+        "role": "particle",
+        "tags": ["fast", "bright"],
+        "width": 8,
+        "height": 8
+      },
+      "type": "particle",
+      "zIndex": 102,
+      "captureToOutput": true,
+      "blendMode": "screen",
+      "opacity": 1
+    }
+  ]
+}
+
+

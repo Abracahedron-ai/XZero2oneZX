@@ -2,15 +2,15 @@
   "name": "zero2onez",
   "version": "1.0.0",
   "description": "Layered compositor with 3D avatar, live camera, and behavior brain",
-  "main": "electron/main.js",
+  "main": "src/frontend/electron/main.js",
   "scripts": {
-    "dev:renderer": "cd renderer && npm run dev",
-    "dev:electron": "electron .",
-    "dev:python": "cd python && uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:renderer": "cd src/frontend/renderer && npm run dev",
+    "dev:electron": "npx electron .",
+    "dev:python": "cd src/backend/api && uvicorn main:app --reload --host 0.0.0.0 --port 8001",
     "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\" \"npm run dev:python\"",
-    "build:renderer": "cd renderer && npm run build",
+    "build:renderer": "cd src/frontend/renderer && npm run build",
     "build": "npm run build:renderer && electron-builder",
-    "start": "electron ."
+    "start": "npx electron ."
   },
   "keywords": ["compositor", "3d", "avatar", "webrtc", "electron"],
   "author": "Zero2oneZ",

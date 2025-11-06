@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "generatedAt": "2025-11-06T09:40:44.154Z",
+  "source": "predefined",
+  "name": "Character Template",
+  "categories": [
+    {
+      "name": "char",
+      "items": [
+        {
+          "category": "char",
+          "name": "character_head",
+          "role": "base",
+          "id": "char_head",
+          "z": 3
+        },
+        {
+          "category": "char",
+          "name": "character_head",
+          "role": "mask",
+          "id": "char_head_mask",
+          "z": 3
+        },
+        {
+          "category": "char",
+          "name": "character_body",
+          "role": "base",
+          "id": "char_body",
+          "z": 2
+        },
+        {
+          "category": "char",
+          "name": "character_body",
+          "role": "mask",
+          "id": "char_body_mask",
+          "z": 2
+        },
+        {
+          "category": "char",
+          "name": "character_legs",
+          "role": "base",
+          "id": "char_legs",
+          "z": 1
+        },
+        {
+          "category": "char",
+          "name": "character_collider",
+          "role": "collider",
+          "id": "char_collider",
+          "z": 0
+        }
+      ]
+    }
+  ]
+}

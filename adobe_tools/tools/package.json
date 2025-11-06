@@ -1,0 +1,28 @@
+{
+  "name": "adobe-tools-exporter",
+  "version": "1.0.0",
+  "description": "Export tools for Adobe Illustrator and Photoshop assets",
+  "main": "make_manifest.js",
+  "scripts": {
+    "normalize": "node make_manifest.js",
+    "template": "node template_generator.js",
+    "template:manifest": "node template_generator.js from-manifest",
+    "template:predefined": "node template_generator.js predefined",
+    "compositor": "node generate_compositor_config.js",
+    "compositor:all": "node generate_compositor_config.js all",
+    "compositor:manifest": "node generate_compositor_config.js from-manifest",
+    "compositor:template": "node generate_compositor_config.js from-template",
+    "generate:all": "node generate_all_templates.js",
+    "quick": "node quick_template.js"
+  },
+  "keywords": [
+    "adobe",
+    "illustrator",
+    "photoshop",
+    "export",
+    "assets"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

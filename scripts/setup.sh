@@ -8,11 +8,11 @@ npm install
 
 # Install renderer dependencies
 echo "📦 Installing renderer dependencies..."
-cd renderer && npm install && cd ..
+cd src/frontend/renderer && npm install && cd ../../..
 
 # Setup Python environment
 echo "🐍 Setting up Python environment..."
-cd python
+cd src/backend/api
 python -m venv venv
 
 # Activate venv and install requirements

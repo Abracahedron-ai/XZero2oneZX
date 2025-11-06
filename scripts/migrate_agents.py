@@ -8,6 +8,7 @@ Populates agent_catalog table from Ottomator ingestor.
 import asyncio
 import asyncpg
 import sys
+import os
 from pathlib import Path
 import json
 
@@ -16,7 +17,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "services"))
 from ottomator_ingestor import OttomatorIngestor, AgentMetadata
 
 
-DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/zero2onez"
+# Use environment variable with fallback to local ScatterBrain database
+DATABASE_URL = os.getenv(
+    'DATABASE_URL', 
+    'postgresql://tomlee3d:%24Pos%24904pine@localhost:5432/ScatterBrain'
+)
 
 
 async def migrate_agents():
@@ -80,4 +85,5 @@ async def migrate_agents():
 
 if __name__ == "__main__":
     asyncio.run(migrate_agents())
+
 

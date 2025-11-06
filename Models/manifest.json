@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/zero2onez/schemas/main/model-manifest.schema.json",
+  "generated_at": "2025-02-17T00:00:00Z",
+  "models": [
+    {
+      "id": "tts/fish-speech",
+      "path": "Models/core/tts/fish-speech",
+      "license": "Apache-2.0",
+      "source": "EXPERIMENTAL/fish-speech",
+      "wrapper": "services/wrappers/tts/fish_speech.py",
+      "notes": "Emotion-aware zero-shot TTS with consented reference voices. Models downloaded from HuggingFace at runtime.",
+      "weights": {
+        "download_url": "https://huggingface.co/fishaudio/openaudio-s1-mini",
+        "checkpoint_pattern": "*.pth",
+        "config_pattern": "*.yaml"
+      }
+    },
+    {
+      "id": "tts/xtts-v2",
+      "path": "Models/core/tts/xtts",
+      "license": "MPL-2.0",
+      "source": "EXPERIMENTAL/XTTS-V2",
+      "wrapper": "services/wrappers/tts/xtts.py",
+      "notes": "Coqui XTTS-V2 for multilingual TTS. Models downloaded from HuggingFace at runtime.",
+      "weights": {
+        "download_url": "https://huggingface.co/coqui/XTTS-v2",
+        "checkpoint_pattern": "*.pth",
+        "config_pattern": "config.json"
+      }
+    },
+    {
+      "id": "asr/faster-whisper",
+      "path": "Models/core/asr/faster-whisper",
+      "license": "MIT",
+      "source": "EXPERIMENTAL/faster-whisper",
+      "wrapper": "services/wrappers/asr/faster_whisper.py",
+      "notes": "Faster Whisper ASR. Models auto-downloaded from HuggingFace. Supported sizes: tiny, base, small, medium, large-v2, large-v3",
+      "weights": {
+        "download_url": "https://huggingface.co/guillaumekln",
+        "model_sizes": ["tiny", "base", "small", "medium", "large-v2", "large-v3"]
+      }
+    },
+    {
+      "id": "llm/qwen2.5-14b",
+      "path": "Models/core/llm/qwen2.5-14b",
+      "license": "Tongyi Qianwen",
+      "source": "EXPERIMENTAL/Qwen-omni",
+      "wrapper": "services/wrappers/llm/qwen.py",
+      "notes": "Qwen2.5 14B LLM. Models must be downloaded separately.",
+      "weights": {
+        "download_url": "https://huggingface.co/Qwen/Qwen2.5-14B",
+        "checkpoint_pattern": "*.safetensors"
+      }
+    },
+    {
+      "id": "emotion/speechbrain-ser",
+      "path": "Models/core/emotion/speech",
+      "license": "Apache-2.0",
+      "source": "EXPERIMENTAL/audio-diffusion-pytorch",
+      "wrapper": "services/wrappers/emotion/speech.py",
+      "notes": "Speech emotion recognition model (SER) with arousal/valence regression. SpeechBrain models auto-downloaded.",
+      "weights": {
+        "download_url": "https://huggingface.co/speechbrain",
+        "model_pattern": "emotion-recognition-*.pth"
+      }
+    },
+    {
+      "id": "emotion/mediapipe-fer",
+      "path": "Models/core/emotion/video",
+      "license": "Apache-2.0",
+      "source": "EXPERIMENTAL/MediaPipe",
+      "wrapper": "services/wrappers/emotion/video.py",
+      "notes": "MediaPipe face emotion recognition. Models bundled with MediaPipe package.",
+      "weights": {
+        "download_url": "bundled",
+        "note": "MediaPipe models are included in the package installation"
+      }
+    },
+    {
+      "id": "legacy/audio2face",
+      "path": "Models/legacy/audio2face-3d-sdk",
+      "license": "NVIDIA Proprietary",
+      "source": "Models/Audio2Face-3D-SDK",
+      "wrapper": "services/integrations/audio2face/README.md",
+      "notes": "NVIDIA Audio2Face 3D SDK. Requires NVIDIA license and model download from NVIDIA developer portal.",
+      "weights": {
+        "download_url": "https://developer.nvidia.com/audio2face",
+        "note": "Requires NVIDIA developer account"
+      }
+    },
+    {
+      "id": "legacy/deep-live-cam",
+      "path": "Models/legacy/deep-live-cam",
+      "license": "MIT",
+      "source": "Deep-Live-Cam",
+      "wrapper": "services/integrations/deep_live_cam/README.md",
+      "notes": "Deep-Live-Cam for face animation. Models downloaded from HuggingFace or GitHub releases.",
+      "weights": {
+        "download_url": "https://github.com/iperov/DeepFaceLive",
+        "checkpoint_pattern": "*.pth"
+      }
+    }
+  ]
+}

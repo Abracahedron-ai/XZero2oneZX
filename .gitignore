@@ -19,6 +19,9 @@ pip-delete-this-directory.txt
 # ============================================
 # Build outputs (should NOT be in git)
 # ============================================
+src/frontend/renderer/.next/
+src/frontend/renderer/out/
+src/frontend/renderer/build/
 renderer/.next/
 renderer/out/
 renderer/build/

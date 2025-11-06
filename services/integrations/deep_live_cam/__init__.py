@@ -1,2 +1,0 @@
-"""Deep-Live-Cam Integration."""
-

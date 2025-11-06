@@ -107,7 +107,7 @@ cd D:\Zero2oneZ
 scripts\setup.bat  # Windows
 
 # 3. Configure database URL
-# Edit python/services/tool_registry.py:
+# Edit src/backend/services/tools/tool_registry.py:
 # DATABASE_URL = "postgresql://postgres:password@localhost:5432/zero2onez"
 ```
 
@@ -217,23 +217,52 @@ You can supply `--hf-token <token>` instead of logging in interactively. The scr
 
 ```
 D:\Zero2oneZ\
-├── database/
-│   └── schema.sql           # Postgres schema + seed data
-├── python/
-│   ├── main.py              # FastAPI server (updated)
-│   └── services/
-│       ├── tool_registry.py       # Tool CRUD + search
-│       ├── discovery_bus.py       # MCP + file watchers
-│       ├── capability_resolver.py # Context filtering
-│       └── agent_executor.py      # Sandboxed execution
-├── renderer/
-│   ├── components/
-│   │   └── RadialMenu.tsx   # Space-triggered radial menu
-│   └── pages/
-│       └── index.tsx        # Dashboard (updated)
-├── agents/
-│   └── rig_generator.py     # Example agent script
-└── tools/                   # User-added tools (watched)
+├── config/
+│   └── database/
+│       └── schema.sql       # Postgres schema + seed data
+├── src/
+│   ├── backend/
+│   │   └── api/
+│   │       ├── main.py      # FastAPI server (updated)
+│   │       └── routes/      # API routes
+│   ├── frontend/
+│   │   └── renderer/
+│   │       ├── components/
+│   │       │   └── RadialMenu.tsx   # Space-triggered radial menu
+│   │       └── pages/
+│   │           └── index.tsx        # Dashboard (updated)
+│   ├── agents/
+│   │   └── rig_generator.py     # Example agent script
+│   └── tools/                   # User-added tools (watched)
+└── services/
+    ├── tool_registry.py       # Tool CRUD + search
+    ├── discovery_bus.py       # MCP + file watchers
+    ├── capability_resolver.py # Context filtering
+    └── agent_executor.py      # Sandboxed execution
+```
+
+---
+
+## 🪟 GUI Toolkit Layout
+
+The repository root now contains a dedicated hierarchy documenting floating GUI panes:
+
+- `animation_tools/` – Keyframe editor, master timeline, and pose library modules.
+- `scene_building_tools/` – Asset shelf, hierarchy inspector, property editor, and viewport surfaces.
+- `character_tools/` – Personality, emotion, behaviour tree, and dialogue authoring panes.
+- `vfx_tools/`, `audio_tools/`, `project_management/`, `streaming/`, `video_production/`, `game_dev/`, `avatar_creation/`, `architectural_viz/`, `product_design/` – Domain clusters that map to specialised operator workflows.
+- `ai_agents/` – Background agent manifests grouped by creators, analyzers, controllers, processors, optimizers, utilities, and experimental workers.
+
+Each directory ships with a README outlining scope, data dependencies, and runtime integration points. Cross-cutting patterns live in `docs/GUI_GUIDE.md`.
+
+### Prototype Reference
+
+The imported reference GUI (legacy Redux-based layout, standalone CRA scaffold) now lives under `prototypes/gui_reference/`. Use it as a design baseline without impacting the Next.js renderer:
+
+```bash
+cd prototypes/gui_reference
+npm install
+npm start
 ```
 
 ---

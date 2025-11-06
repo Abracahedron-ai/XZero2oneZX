@@ -1,5 +1,6 @@
 import argparse
 import sys
+import time
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -10,7 +11,7 @@ from huggingface_hub import snapshot_download
 Utility script to download all Hugging Face models required by the project.
 
 Usage:
-    python scripts/download_hf_models.py --output Models/cache
+    python scripts/download_hf_models.py --output Models/huggingface
 
 If any repository requires authentication, run `huggingface-cli login` first or
 pass `--hf-token <token>`.
@@ -31,23 +32,56 @@ MODEL_SPECS: List[Dict[str, object]] = [
 ]
 
 
-def download_models(destination: Path, token: Optional[str] = None) -> None:
+def download_models(destination: Path, token: Optional[str] = None, max_retries: int = 3) -> None:
+    """Download all models and organize them properly with retry logic."""
     destination.mkdir(parents=True, exist_ok=True)
 
     for spec in MODEL_SPECS:
         repo_id = spec["repo_id"]  # type: ignore[index]
         allow_patterns = spec.get("allow_patterns")
-        local_dir = destination / repo_id.replace("/", "__")
+        
+        # Organize as org/model-name structure
+        org, model_name = repo_id.split("/", 1)
+        org_dir = destination / org
+        org_dir.mkdir(exist_ok=True)
+        local_dir = org_dir / model_name
 
         print(f"[download] {repo_id} → {local_dir}")
-        snapshot_download(
-            repo_id=repo_id,  # type: ignore[arg-type]
-            local_dir=str(local_dir),
-            local_dir_use_symlinks=False,
-            token=token,
-            allow_patterns=allow_patterns,
-            resume_download=True,
-        )
+        
+        # Retry logic for network failures
+        last_error = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                snapshot_download(
+                    repo_id=repo_id,  # type: ignore[arg-type]
+                    local_dir=str(local_dir),
+                    token=token,
+                    allow_patterns=allow_patterns,
+                    # Downloads automatically resume if interrupted
+                    # No need for deprecated resume_download parameter
+                )
+                print(f"[OK] {repo_id} downloaded successfully")
+                break  # Success, exit retry loop
+            except Exception as e:
+                last_error = e
+                error_msg = str(e)
+                
+                # Check if it's a network/connection error
+                is_network_error = any(keyword in error_msg.lower() for keyword in [
+                    'connection', 'reset', 'timeout', 'network', '10054', 
+                    'cas service error', 'connectionreset'
+                ])
+                
+                if attempt < max_retries and is_network_error:
+                    wait_time = attempt * 5  # Exponential backoff: 5s, 10s, 15s
+                    print(f"[RETRY {attempt}/{max_retries}] Network error, retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    if attempt >= max_retries:
+                        print(f"[ERROR] Failed to download {repo_id} after {max_retries} attempts: {last_error}")
+                    else:
+                        print(f"[ERROR] Failed to download {repo_id}: {e}")
+                    break  # Exit retry loop
 
 
 def main() -> None:
@@ -57,8 +91,8 @@ def main() -> None:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("Models/cache"),
-        help="Directory where models should be downloaded.",
+        default=Path("Models/huggingface"),
+        help="Directory where models should be downloaded (default: Models/huggingface).",
     )
     parser.add_argument(
         "--hf-token",

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "generatedAt": "2025-01-11T20:00:00.000Z",
+  "source": "predefined",
+  "name": "Particle System Template Example",
+  "categories": [
+    {
+      "name": "particles",
+      "items": [
+        {
+          "category": "particles",
+          "name": "explosion_core",
+          "role": "emitter",
+          "id": "part_expl_core",
+          "z": 100,
+          "width": 64,
+          "height": 64,
+          "tags": ["burst", "radial"]
+        },
+        {
+          "category": "particles",
+          "name": "explosion_debris",
+          "role": "particle",
+          "id": "part_expl_deb",
+          "z": 101,
+          "width": 16,
+          "height": 16,
+          "tags": ["trail", "gravity"]
+        },
+        {
+          "category": "particles",
+          "name": "smoke_cloud",
+          "role": "particle",
+          "id": "part_smoke",
+          "z": 99,
+          "width": 32,
+          "height": 32,
+          "tags": ["fade", "expand"]
+        },
+        {
+          "category": "particles",
+          "name": "spark",
+          "role": "particle",
+          "id": "part_spark",
+          "z": 102,
+          "width": 8,
+          "height": 8,
+          "tags": ["fast", "bright"]
+        },
+        {
+          "category": "particles",
+          "name": "fire_emitter",
+          "role": "emitter",
+          "id": "part_fire_emit",
+          "z": 98,
+          "width": 48,
+          "height": 48,
+          "tags": ["radial", "upward"]
+        },
+        {
+          "category": "particles",
+          "name": "fire_particle",
+          "role": "particle",
+          "id": "part_fire",
+          "z": 99,
+          "width": 24,
+          "height": 24,
+          "tags": ["fade", "bright"]
+        },
+        {
+          "category": "particles",
+          "name": "magic_sparkle",
+          "role": "particle",
+          "id": "part_magic",
+          "z": 103,
+          "width": 12,
+          "height": 12,
+          "tags": ["bright", "twinkle"]
+        },
+        {
+          "category": "particles",
+          "name": "water_drop",
+          "role": "particle",
+          "id": "part_water",
+          "z": 97,
+          "width": 6,
+          "height": 6,
+          "tags": ["gravity", "splash"]
+        },
+        {
+          "category": "particles",
+          "name": "trail_line",
+          "role": "trail",
+          "id": "part_trail",
+          "z": 104,
+          "width": 4,
+          "height": 32,
+          "tags": ["motion", "blur"]
+        }
+      ]
+    }
+  ]
+}
+
+

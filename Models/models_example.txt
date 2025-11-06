@@ -1,0 +1,23 @@
+# Example models list for Hugging Face downloader
+# One model ID per line
+# Lines starting with # are comments
+
+# Vision models
+facebook/metaclip-h14-fullcc2.5b
+facebook/dinov2-giant
+facebook/dinov2-small
+
+# Audio models
+facebook/wav2vec2-large-960h
+facebook/musicgen-stereo-large
+
+# LLM models
+facebook/MobileLLM-R1-950M
+nvidia/omnivinci
+
+# Multimodal
+Qwen/Qwen3-VL-2B-Instruct
+
+
+
+
